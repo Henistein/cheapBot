@@ -1,0 +1,3 @@
+# cheapETH discord bot
+
+0xDf1B72FC1bA5a77DD6c038DC2bc70746fFCA5caA
