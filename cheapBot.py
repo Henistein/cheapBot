@@ -2,6 +2,7 @@ import discord
 import re
 import os
 import datetime
+from jsonrpcclient import request
 
 TOKEN = os.getenv('TOKEN')
 
@@ -36,8 +37,17 @@ async def on_message(message):
       message_words = message.content.split()
       for word in message_words:
         if re.search("^0x([A-Fa-f0-9]{40})$", word):
-          s = ('**'+message.author.name+'**' + ': ' + 'https://expedition.dev/address/' + word + 
-              '?rpcUrl=https%3A%2F%2Fnode.cheapeth.org%2Frpc')
+
+          # Using JSON-RPC to retrieve balance info from https://cheapeth.org/rpc
+          blockNum = request("https://node.cheapeth.org/rpc", "eth_blockNumber").data.result
+          bal = request("https://node.cheapeth.org/rpc", "eth_getBalance", word, blockNum).data.result
+          count = request("https://node.cheapeth.org/rpc", "eth_getTransactionCount", word, blockNum).data.result
+          bal = str(float.fromhex(bal))
+          count = str(int(count, 16))
+          print(bal)
+          s = ('**'+message.author.name+'**' + ': ' + 'https://explore.cheapswap.io/account' 
+              + word + '\n**Balance:** ' + bal + ' cTH' + '\n**Transactions**: ' + count) 
+
 
           cooldown = (datetime.datetime.now() + datetime.timedelta(seconds=60))
           if allow_message(word, cooldown_list):
