@@ -42,11 +42,11 @@ async def on_message(message):
           blockNum = request("https://node.cheapeth.org/rpc", "eth_blockNumber").data.result
           bal = request("https://node.cheapeth.org/rpc", "eth_getBalance", word, blockNum).data.result
           count = request("https://node.cheapeth.org/rpc", "eth_getTransactionCount", word, blockNum).data.result
-          bal = str(float.fromhex(bal))
+          bal = str(round(float.fromhex(bal)/(1e+18), 10))
           count = str(int(count, 16))
           print(bal)
-          s = ('**'+message.author.name+'**' + ': ' + 'https://explore.cheapswap.io/account' 
-              + word + '\n**Balance:** ' + bal + ' cTH' + '\n**Transactions**: ' + count) 
+          s = ('**'+message.author.name+'**' + ': ' + '<https://explore.cheapswap.io/account/' 
+              + word + '>' + '\n**Balance:** ' + bal + ' cTH' + '\n**Transactions**: ' + count) 
 
 
           cooldown = (datetime.datetime.now() + datetime.timedelta(seconds=60))
