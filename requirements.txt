@@ -1,0 +1,5 @@
+discord
+re
+os
+datetime
+jsonrpcclient 
