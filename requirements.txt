@@ -3,3 +3,4 @@ re
 os
 datetime
 jsonrpcclient 
+fastapi
