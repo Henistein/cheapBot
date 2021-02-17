@@ -1,4 +1,5 @@
 # Party Bot - CheapEth Discord Bot
+Make me a whale? 0x4B49a455fcAe37975d0800C9C415a572FB09f3e1
 
 This is a super simple party bot so you can get free cheapEth in an automated manner.
 Is cheapEth the future? Hell yeah!
