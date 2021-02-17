@@ -1,11 +1,30 @@
 import discord
 from discord.ext import commands
+from web3 import Web3
 import os
 import re
+
 
 # env
 from dotenv import load_dotenv
 load_dotenv()
+
+# web3
+free_cTH_value = os.getenv('FREE_CTH_VALUE')
+cTH_private_key = os.getenv('CTH_PRIVATE_KEY')
+
+w3 = Web3(Web3.HTTPProvider('https://node.cheapeth.org/rpc'))
+assert w3.isConnected() == True
+assert w3.eth.chainId == 777  # check if we are on the right chainid
+
+# check if account can be unlocked from private key
+# and set it as default so we can use it later
+acct = w3.eth.account.from_key(cTH_private_key)
+assert acct.address != None
+
+w3.eth.defaultAccount = acct
+
+# bot stuff after here
 
 client = discord.Client()
 
@@ -39,8 +58,15 @@ def check_spam(address, author):
 
 
 def send_money(address):
-    # def need to do smth here
-    pass
+    # TODO: check why we always get
+    # ValueError: {'code': -32000, 'message': 'unknown account'}
+    w3.sendTransaction(
+        {
+            'to': '%s' % address,
+            'from': '%s' % w3.eth.defaultAccount.address,
+            'value': free_cTH_value
+        }
+    )
 
 
 @client.event

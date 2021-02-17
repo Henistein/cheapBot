@@ -4,16 +4,22 @@ This is a super simple party bot so you can get free cheapEth in an automated ma
 Is cheapEth the future? Hell yeah!
 
 ## Usage
-Before deploying create a `.env` file containing the follwing vars: 
+
+Before deploying create a `.env` file containing the follwing vars:
 
 ```Bash
 TOKEN=YOUR_DISCORD_TOKEN
 PARTYTOKENS=party,🚀,paaaaaarty
+
+# wallet stuff
+CTH_PRIVATE_KEY=YOUR_PRIVATE_KEY
+FREE_CTH_VALUE=THE_AMOUNT_SOMEONE_GETS_FREE
 ```
 
 Now you can simply run the bot by calling `python3 bot.py`
 
 ## Client Usage
+
 The bot will listen to all messages that start with one of the `PARTYTOKENS`. If the message has the format `[PARTYTOKEN] [ADDRESS]` the bot will store the free cTH request. If someone tries to spam or get money multiple times the spamed messages will be deleted and the users gets an error message.
 
 ## More info
