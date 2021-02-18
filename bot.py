@@ -4,6 +4,7 @@ import os
 import datetime
 import json
 from jsonrpcclient import request
+import clientBot as cb
 
 TOKEN = os.getenv('TOKEN')
 
@@ -39,8 +40,6 @@ def update_list(meme_list):
 
 def update_json(meme_list):
   temp = []
-  f = open("approval.json", "w")
-  f.close()
   with open("approval.json", "w") as outfile:
     for i in meme_list:
       dictionary = {
@@ -61,6 +60,12 @@ def update_json(meme_list):
       json_object = json.dumps(temp)
     outfile.write(json_object)
 
+def approved_users(meme_list):
+  for i in meme_list:
+    if i[3] >= min_approval:
+      info = f'{i[2]} {i[3]}'
+      cb.sendInfo(info)
+      print(info)
 
 @client.event
 async def on_ready():
@@ -107,10 +112,12 @@ async def on_message(message):
 async def on_reaction_add(user, reaction):
   update_list(meme_list)
   update_json(meme_list)
+  #approved_users(meme_list)
 
 @client.event
 async def on_raw_reaction_remove(payload):
   update_list(meme_list)
   update_json(meme_list)
+  #approved_users(meme_list)
     
 client.run(TOKEN)

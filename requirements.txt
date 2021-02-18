@@ -1,6 +1,4 @@
-discord
-re
-os
-datetime
-jsonrpcclient 
-fastapi
+jsonrpcclient==3.3.6
+discord.py==1.6.0
+discord==1.0.1
+fastapi==0.63.0
