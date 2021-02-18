@@ -43,12 +43,7 @@ def update_json(meme_list):
   temp = []
   with open("approval.json", "w") as outfile:
     for i in meme_list:
-      dictionary = {
-        "uuid" : "",
-        "reactions" : "",
-        "approval" : "",
-        "expired_time" : ""
-      }
+      dictionary = {}
       dictionary["uuid"] = i[2]
       dictionary["reactions"] = i[3]
       if i[3] >= min_approval:
