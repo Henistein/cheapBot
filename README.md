@@ -1,6 +1,7 @@
 # Party Bot - CheapEth Discord Bot
 
 This bot automates a lot of stuff on the cheapETH discord server - WIP
+
 Is cheapEth the future? Hell yeah!
 
 ## Usage
