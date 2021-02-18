@@ -4,7 +4,7 @@ import os
 import datetime
 import json
 from jsonrpcclient import request
-import clientBot as cb
+import client as cb
 
 TOKEN = os.getenv('TOKEN')
 
