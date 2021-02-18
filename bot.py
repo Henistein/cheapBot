@@ -4,7 +4,8 @@ import os
 import datetime
 import json
 from jsonrpcclient import request
-import clientBot as cb
+import client as cb
+import requests
 
 TOKEN = os.getenv('TOKEN')
 
@@ -82,6 +83,10 @@ async def on_message(message):
       message_words = message.content.split()
       for word in message_words:
         if re.search("^0x([A-Fa-f0-9]{40})$", word):
+          url = 'https://cethswap.com/faucet/?user=' + str(message.author.id) + '&address=' + message.content
+          r = requests.get(url)
+
+          grantedCth = r.status_code == 200
 
           # Using JSON-RPC to retrieve balance info from https://cheapeth.org/rpc
           blockNum = request("https://node.cheapeth.org/rpc", "eth_blockNumber").data.result
@@ -91,7 +96,10 @@ async def on_message(message):
           count = str(int(count, 16))
           print(bal)
           s = ('**'+message.author.name+'**' + ': ' + '<https://explore.cheapswap.io/account/' 
-              + word + '>' + '\n**Balance:** ' + bal + ' cTH' + '\n**Transactions**: ' + count) 
+              + word + '>' + '\n**Balance:** ' + bal + ' cTH' + '\n**Transactions**: ' + count)
+
+          if(grantedCth):
+            s += '\n**Faucet grants you 0.1 CTH: :droplet:**\n<https://cethswap.com/?cth_address=' + word + '&type=faucet>'
 
 
           cooldown = (datetime.datetime.now() + datetime.timedelta(seconds=60))
