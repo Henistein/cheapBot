@@ -3,10 +3,6 @@ import discord
 from discord.ext import commands
 import os
 import sys
-modulenames = set(sys.modules) & set(globals())
-allmodules = [sys.modules[name] for name in modulenames]
-print(allmodules)
-
 
 # bot stuff after here
 
@@ -25,8 +21,10 @@ async def on_message(message):
   if msg[0] == PREFIX:
     cmd = msg[1]
     try:
-      func = eval(f"{msg[1]}.run")
-      await func(client=client, message=message)
+      #Checks if script is present in scripts/
+      if msg[1] in list(set([file.split('.')[0] for file in os.listdir('scripts/')][3:])):
+        func = eval(f"{msg[1]}.run")
+        await func(client=client, message=message)
     except ValueError as v:
       raise v
 
