@@ -1,15 +1,46 @@
-# cheapETH discord bot
+#cheapBot - CheapEth Discord Bot
 
-henistein: 0xDf1B72FC1bA5a77DD6c038DC2bc70746fFCA5caA
+This bot automates a lot of stuff on the cheapETH discord server - WIP
 
-shr1ftyy: 0x3f4e8A8012ccc8E26Be83db3B6d97310271EE001 
+Is cheapEth the future? Hell yeah!
 
-pasmat: 0x2d10651BC6BC4d18A44100F0C03E3AD02b4f37b8 
+## Usage
 
-## Install
+**List of commands:**
+
+- [gimme](#gimme)
+
+### <a name="gimme">gimme</a>
+Sending the message `$cheap gimme YOUR_CTH_WALLET_ADDRESS_HERE` will make the
+bot send a request to a faucet to send you a small amount of cTH (if your are
+eligible). 
+
+## Deployment
+
+Before deploying create a `.env` file containing the following vars:
+
+```Bash
+TOKEN=YOUR_DISCORD_TOKEN
 ```
-pip install -r requirements.txt
-```
-```
-python3 bot.py
-```
+
+First, install dependencies by calling `pip3 install -r requirements.txt`
+Then, simply run the bot by calling `python3 bot.py`
+
+## Contributing
+
+In the future this bot will be able to do all sorts of things cheapETH related. If you want to add a command etc take a look at [CONTRIBUTING.md](./CONTRIBUTING.md) we would be happy if you help us grow this bot! The best way to get in touch with us is to join our [Discord server](https://discord.gg/r3WUGxzUH8).
+
+## More info
+
+Wanna to join cheapEth discord? Here is the link: https://discord.gg/r3WUGxzUH8
+
+More infos about cheapEth can be found here: https://cheapeth.org/
+
+## List of contributers
+
+If you think our work is worth some cTH? Why not make us whales? You can find our address below
+
+- Diego: 0x4B49a455fcAe37975d0800C9C415a572FB09f3e1
+- Shr1ftyy: 0x3f4e8A8012ccc8E26Be83db3B6d97310271EE001
+- henistein: 0xDf1B72FC1bA5a77DD6c038DC2bc70746fFCA5caA
+- pasmat: 0x2d10651BC6BC4d18A44100F0C03E3AD02b4f37b8 
