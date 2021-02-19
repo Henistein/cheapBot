@@ -20,12 +20,11 @@ async def on_message(message):
     if msg[0].lower() == PREFIX:
         if len(msg) < 2:
             return
-        cmd = msg[1]
+        cmd = msg[1].lower()
         try:
             # Checks if script is present in scripts
             if cmd in list(set([file.split('.')[0] for file in os.listdir('scripts/')][3:])):
-                # func = eval(f"{cmd}.run")
-                func = eval(f"{msg[1]}.run")
+                func = eval(f"{cmd}.run")
                 await func(client=client, message=message)
         except ValueError as v:
             raise v
