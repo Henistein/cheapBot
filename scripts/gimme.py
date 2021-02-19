@@ -1,64 +1,83 @@
-import discord
-import pickle
-import re
-import os
 import datetime
-import json
-from jsonrpcclient import request
+import re
+from typing import Dict, List, Tuple
+
+import discord
 import requests
+from discord.ext import commands
+from discord.ext.commands import cooldowns
+from jsonrpcclient import request  # type: ignore
 
-'''
-moved bot.py from henistein's repo to scripts/faucet.py  
-TODO: Refactor this script to comply with flow of imgs/diagram.png
-'''
+import config
 
-# insert the allowed channels
-allowed_channels = ['test']
 
-cooldown_list = []
+class Gimme(commands.Cog):
+    bot: commands.Bot
+    allowed_channels: List[str]
+    cooldowns: Dict[str, datetime.datetime]
+    faucet_url: str
 
-def allow_message(word, cooldown_list):
-  for i in cooldown_list:
-    if word in i:
-      if datetime.datetime.now() > i[1]:
-        cooldown_list.remove(i)
+    def __init__(self, bot: commands.bot):
+        super().__init__()
+        self.bot = bot
+        self.allowed_channels = config.allowed_gimme_channels
+        self.cooldowns = {}
+        self.faucet_url = config.faucet_url
+
+    def not_on_cooldown(self, addr: str) -> bool:
+        if addr in self.cooldowns:
+            if datetime.datetime.now() > self.cooldowns[addr]:
+                self.cooldowns.pop(addr)
+                return True
+            else:
+                return False
+
         return True
-      else:
-        return False
-  return True
 
-# IMPORTANT: this was the on_message event, has been renamed to run to comply with repo's program flow
-async def run(client, message):
-  if message.author == client.user:
-    return
+    # IMPORTANT: this was the on_message event, has been renamed to run to comply with repo's
+    # program flow
+    @commands.command()
+    async def gimme(self, ctx: commands.Context):
 
-  # Check if the address is on message
-  if message.content:
-    if message.channel.name in allowed_channels:
-      message_words = message.content.split()
-      for word in message_words:
-        if re.search("^0x([A-Fa-f0-9]{40})$", word):
-          url = 'https://cethswap.com/faucet/?user=' + str(message.author.id) + '&address=' + message.content
-          r = requests.get(url)
+        if ctx.author.bot:
+            return
 
-          grantedCth = r.status_code == 200
-          print(r.status_code)
+        # Check if the address is on message
+        if not ctx.message.content:
+            return
 
-          # Using JSON-RPC to retrieve balance info from https://cheapeth.org/rpc
-          blockNum = request("https://node.cheapeth.org/rpc", "eth_blockNumber").data.result
-          bal = request("https://node.cheapeth.org/rpc", "eth_getBalance", word, blockNum).data.result
-          count = request("https://node.cheapeth.org/rpc", "eth_getTransactionCount", word, blockNum).data.result
-          bal = str(round(float.fromhex(bal)/(1e+18), 10))
-          count = str(int(count, 16))
-          print(bal)
-          s = ('**'+message.author.name+'**' + ': ' + '<https://explore.cheapswap.io/account/' 
-              + word + '>' + '\n**Balance:** ' + bal + ' cTH' + '\n**Transactions**: ' + count)
+        if ctx.channel.name in self.allowed_channels:
+            message: discord.Message = ctx.message
+            message_words: List[str] = message.content.split()
 
-          if(grantedCth):
-            s += '\n**Faucet grants you 0.1 CTH: :droplet:**\n<https://cethswap.com/?cth_address=' + word + '&type=faucet>'
+            for word in message_words:
+                if re.search('^0x([A-Fa-f0-9]{40})$', word):
+                    addr = word
+                    url = f'{self.faucet_url}{message.author.id}&address={addr}'
+                    r = requests.get(url)
 
+                    grantedCth = r.status_code == 200
+                    print(r.status_code)
 
-          cooldown = (datetime.datetime.now() + datetime.timedelta(seconds=60))
-          if allow_message(word, cooldown_list):
-            cooldown_list.append((word, cooldown))
-            await message.channel.send(s)
+                    # Using JSON-RPC to retrieve balance info from https://cheapeth.org/rpc
+                    blockNum = request(config.rpc_url, 'eth_blockNumber').data.result
+                    bal = request(config.rpc_url, 'eth_getBalance', addr, blockNum).data.result
+                    count = request(config.rpc_url, 'eth_getTransactionCount', addr,
+                                    blockNum).data.result
+                    bal = str(round(float.fromhex(bal) / (1e+18), 10))
+                    count = str(int(count, 16))
+                    print(bal)
+
+                    s = f'**{message.author.name}**: <https://explore.cheapswap.io/account/{addr}>'
+                    s += f'\n**Balance**: {bal} cTH'
+                    s += f'\n**Transactions**: {count}'
+
+                    if grantedCth:
+                        s += f'\n**Faucet grants you 0.1 cTH: :droplet:**'
+                        s += f'\n<https://cethswap.com/?cth_address={addr}&type=faucet>'
+
+                    cooldown = datetime.datetime.now() + datetime.timedelta(seconds=60)
+
+                    if self.not_on_cooldown(addr):
+                        self.cooldowns[addr] = cooldown
+                        await message.channel.send(s)

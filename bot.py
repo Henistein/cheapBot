@@ -1,31 +1,27 @@
-from scripts import * 
-import discord
-from discord.ext import commands
-import os
-import sys
+from discord.ext import commands  # type: ignore
 
-# bot stuff after here
-
-PREFIX = '$cheap'
-client = discord.Client()
-
-@client.event
-async def on_ready():
-		print('We have logged in as {0.user}'.format(client))
+import config
+from scripts.gimme import Gimme
+from scripts.verify import MemeVerify
 
 
-@client.event
-async def on_message(message):
+class CheapBot(commands.Bot):
+    prefix: str
 
-  msg = message.content.split(' ')
-  if msg[0] == PREFIX:
-    cmd = msg[1]
-    try:
-      #Checks if script is present in scripts/
-      if msg[1] in list(set([file.split('.')[0] for file in os.listdir('scripts/')][3:])):
-        func = eval(f"{msg[1]}.run")
-        await func(client=client, message=message)
-    except ValueError as v:
-      raise v
+    def __init__(self, prefix='$cheap', min_approval=10, allowed_channels=[], cooldown_time=5 * 60):
+        super().__init__(command_prefix=prefix)
+        self.prefix = prefix
 
-client.run(os.getenv('TOKEN'))
+    async def on_ready(self):
+        print(f'We have logged in as {self.user}')
+
+    async def on_message(self, message):
+        await self.process_commands(message)
+        return
+
+
+if __name__ == '__main__':
+    bot = CheapBot(prefix='$cheap ', allowed_channels=['test'])
+    bot.add_cog(Gimme(bot))
+    bot.add_cog(MemeVerify(bot))
+    bot.run(config.token)
