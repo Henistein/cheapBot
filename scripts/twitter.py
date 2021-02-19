@@ -1,4 +1,3 @@
-import discord
 import pickle
 import re
 import os
@@ -6,7 +5,13 @@ import datetime
 import json
 from jsonrpcclient import request
 import requests
+from typing import Dict, List, Tuple
 
+import discord
+import requests                 
+from discord.ext import commands
+
+import config
 """
 Twitter bot
 
@@ -14,37 +19,46 @@ Read discord messages, send request to smart contract
 """
 
 # insert the allowed channels
-allowed_channels = ['free-cheapeth-sold-out']
 
-cooldown_list = []
+class Twitter(commands.Cog):
+  bot: commands.Bot
+  allowed_channels: List[str]
 
-
-def allow_message(word, cooldown_list):
-    for i in cooldown_list:
-        if word in i:
-            if datetime.datetime.now() > i[1]:
-                cooldown_list.remove(i)
-                return True
-            else:
-                return False
-    return True
-
-
-def extract_address(message):
-    p = re.compile('(0x[a-fA-F0-9]{40})')
-    result = p.search(message)
-    if result is None:
-        return None
-    return result.group(1)
+  def __init__(self, bot):
+    self.bot = bot
+    self.allowed_channels = config.allowed_twitter_channels
+  
+  def allow_message(self, word, cooldown_list):
+      for i in cooldown_list:
+          if word in i:
+              if datetime.datetime.now() > i[1]:
+                  cooldown_list.remove(i)
+                  return True
+              else:
+                  return False
+      return True
 
 
-async def run(client, message):
-    if message.author == client.user:
-        return
+  def extract_address(self, message):
+      p = re.compile('(0x[a-fA-F0-9]{40})')
+      result = p.search(message)
+      if result is None:
+          return None
+      return result.group(1)
+
+  @commands.command()
+  async def twitter(self, ctx):
+
+    if ctx.author.bot:
+      return        
+
+    if not ctx.message.content:
+      return                 
 
     # Check if the address is on message
-    if message.content:
-        if message.channel.name in allowed_channels:
+    if ctx.message.content:
+        if ctx.channel.name in self.allowed_channels:
+            message = ctx.message
 
             if len(message.content.split(' ')) < 4:
                 await message.channel.send(
@@ -52,7 +66,7 @@ async def run(client, message):
                 return
 
             # check that 3rd is eth addr
-            address = extract_address(message.content)
+            address = self.extract_address((message.content))
 
             # not adding a address is a no go
             if address is None:
@@ -81,5 +95,4 @@ async def run(client, message):
 
             await message.channel.send(
                 'Request sent to contract! %s, userID: %s, tx: %s' % (message.author.mention, user, tx_hash))
-
-            # Cooldown?
+     

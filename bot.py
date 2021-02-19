@@ -3,6 +3,7 @@ from discord.ext import commands  # type: ignore
 import config
 from scripts.gimme import Gimme
 from scripts.verify import MemeVerify
+from scripts.twitter import Twitter
 
 
 class CheapBot(commands.Bot):
@@ -21,7 +22,8 @@ class CheapBot(commands.Bot):
 
 
 if __name__ == '__main__':
-    bot = CheapBot(prefix='$cheap ', allowed_channels=['test'])
+    bot = CheapBot(prefix='$cheap ', allowed_channels=['free-cheapeth-sold-out'])
     bot.add_cog(Gimme(bot))
     bot.add_cog(MemeVerify(bot))
+    bot.add_cog(Twitter(bot))
     bot.run(config.token)
