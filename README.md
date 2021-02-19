@@ -44,3 +44,4 @@ If you think our work is worth some cTH? Why not make us whales? You can find ou
 - Shr1ftyy: 0x3f4e8A8012ccc8E26Be83db3B6d97310271EE001
 - henistein: 0xDf1B72FC1bA5a77DD6c038DC2bc70746fFCA5caA
 - pasmat: 0x2d10651BC6BC4d18A44100F0C03E3AD02b4f37b8 
+- Delta: 0x574E0f8B36A2c40cA664562C334f61B4c6f67Fd6
