@@ -9,12 +9,20 @@ Is cheapEth the future? Hell yeah!
 **List of commands:**
 
 - [gimme](#gimme)
+- [twitter](#twitter)
 
 ### <a name="gimme">gimme</a>
 Sending the message `$cheap gimme YOUR_CTH_WALLET_ADDRESS_HERE` will make the
 bot send a request to a faucet to send you a small amount of cTH (if your are
 eligible). 
 
+### <a name="twitter">twitter</a>
+Tweet must include one of these: "cheapeth", "cheapethereum", "#cth", "$CTH"
+Then post in bot channel, syntax: `$cheap twitter <twitterID> <your cth arrd>`
+Get your twitter ID from this site: https://tweeterid.com/
+<1000 folllowers = 1cth
+1000-2000 followers=2cth
+2000+followers=3cth
 ## Deployment
 
 Before deploying create a `.env` file containing the following vars:

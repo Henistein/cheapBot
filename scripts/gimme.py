@@ -17,7 +17,7 @@ class Gimme(commands.Cog):
     cooldowns: Dict[str, datetime.datetime]
     faucet_url: str
 
-    def __init__(self, bot: commands.bot):
+    def __init__(self, bot: commands.Bot):
         super().__init__()
         self.bot = bot
         self.allowed_channels = config.allowed_gimme_channels
