@@ -49,3 +49,5 @@ If you think our work is worth some cTH? Why not make us a whale? You can find o
 
 - Diego: 0x4B49a455fcAe37975d0800C9C415a572FB09f3e1
 - Shr1ftyy: 0x3f4e8A8012ccc8E26Be83db3B6d97310271EE001
+- henistein: 0xDf1B72FC1bA5a77DD6c038DC2bc70746fFCA5caA
+- pasmat: 0x2d10651BC6BC4d18A44100F0C03E3AD02b4f37b8 
