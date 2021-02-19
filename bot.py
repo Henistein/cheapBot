@@ -22,7 +22,7 @@ async def on_message(message):
     cmd = msg[1]
     try:
       #Checks if script is present in scripts/
-      if msg[1] in list(set([file.split('.')[0] for file in os.listdir('scripts/')][3:])):
+      if msg[1] in list(set([file.split('.')[0] for file in os.listdir('scripts/') if file.endswith('.py')])):
         func = eval(f"{msg[1]}.run")
         await func(client=client, message=message)
     except ValueError as v:
