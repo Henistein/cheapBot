@@ -10,7 +10,7 @@ Fork repo, then send a pull request that which meets the following criteria:
   command suffix as its filename. e.g. calling `$cheap lulz` via discord should
   call the script `lulz.py` from within the `scripts` folder.
 - The script must have a `run` function, as this is what is called by the
-  `bot.py` script.
+  `bot.py` script. The run function must take two params: `client` and `message`
 - Describe your script in the README.md properly so everyone knows how to use it and what it does.
 
 ## Structure
