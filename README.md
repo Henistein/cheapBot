@@ -25,12 +25,7 @@ Get your twitter ID from this site: https://tweeterid.com/
 2000+followers=3cth
 ## Deployment
 
-Before deploying create a `.env` file containing the following vars:
-
-```Bash
-TOKEN=YOUR_DISCORD_TOKEN
-```
-
+Before deploying paste your token in config.py
 First, install dependencies by calling `pip3 install -r requirements.txt`
 Then, simply run the bot by calling `python3 bot.py`
 
