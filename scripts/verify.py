@@ -100,7 +100,7 @@ class MemeVerify(commands.Cog):
             if message.attachments:
                 message_words = message.content.split()
                 for word in message_words:
-                    if re.search(r'^0x[a-fA-F0-9]{40}$', word):
+                    if re.search("^[- a-fA-F0-9]{36}$", word):
                         meme_time = (datetime.datetime.now() + datetime.timedelta(minutes=60))
                         meme = Meme(message, meme_time, word, 0)
                         self.meme_list.append(meme)

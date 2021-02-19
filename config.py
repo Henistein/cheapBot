@@ -1,4 +1,4 @@
-token = ''
+token = 'Njg4NDk0NDk3MjYwMTA5ODI5.Xm1Idw.Ab_gPl2YTlQe2z-o3wS4wSnatQY'
 
 # Memes
 allowed_meme_channels = ['cheap-memes']
