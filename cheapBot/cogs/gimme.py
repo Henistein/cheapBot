@@ -71,6 +71,8 @@ class Gimme(commands.Cog):
           if grantedCth:
             s += f'\n**Faucet grants you 0.1 cTH: :droplet:**'
             s += f'\n<https://cethswap.com/?cth_address={addr}&type=faucet>'
+          else:
+            s += f'\n**You have not been given any cTH. Try again later.**'
 
           cooldown = datetime.datetime.now() + datetime.timedelta(seconds=60)
 
