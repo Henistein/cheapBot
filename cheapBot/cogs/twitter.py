@@ -1,11 +1,12 @@
-import re
 import datetime
-import requests
+import re
 from typing import List
 
+import requests
 from discord.ext import commands
 
 from .. import config
+
 """
 Twitter bot
 
@@ -88,4 +89,3 @@ class Twitter(commands.Cog):
 
         await message.channel.send(
           'Request sent to contract! %s, userID: %s, tx: %s' % (message.author.mention, user, tx_hash))
- 

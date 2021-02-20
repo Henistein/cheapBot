@@ -1,9 +1,9 @@
 from discord.ext import commands  # type: ignore
 
-from .cogs.gimme import Gimme
-from .cogs.verify import MemeVerify
-from .cogs.twitter import Twitter
 from . import config
+from .cogs.gimme import Gimme
+from .cogs.twitter import Twitter
+from .cogs.verify import MemeVerify
 
 
 class CheapBot(commands.Bot):
@@ -24,4 +24,3 @@ if __name__ == '__main__':
   bot.add_cog(MemeVerify(bot))
   bot.add_cog(Twitter(bot))
   bot.run(config.token)
-

@@ -7,8 +7,8 @@ import discord  # type: ignore
 from discord.ext import commands
 
 from .. import config
-
 from . import client as cb
+
 '''
 Verification script, using the power of memes - WIP
 '''
