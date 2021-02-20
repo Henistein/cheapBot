@@ -1,16 +1,14 @@
 from discord.ext import commands  # type: ignore
 
-import config
-from scripts.gimme import Gimme
-from scripts.verify import MemeVerify
-from scripts.twitter import Twitter
+from .cogs.gimme import Gimme
+from .cogs.verify import MemeVerify
+from .cogs.twitter import Twitter
+from . import config
+
 
 class CheapBot(commands.Bot):
-  prefix: str
-
-  def __init__(self, prefix='$cheap', min_approval=10, allowed_channels=[], cooldown_time=5 * 60):
+  def __init__(self, prefix='$cheap '):
     super().__init__(command_prefix=prefix)
-    self.prefix = prefix
 
   async def on_ready(self):
     print(f'We have logged in as {self.user}')
@@ -21,8 +19,9 @@ class CheapBot(commands.Bot):
 
 
 if __name__ == '__main__':
-  bot = CheapBot(prefix='$cheap ', allowed_channels=['free-cheapeth-sold-out'])
+  bot = CheapBot()
   bot.add_cog(Gimme(bot))
   bot.add_cog(MemeVerify(bot))
   bot.add_cog(Twitter(bot))
   bot.run(config.token)
+

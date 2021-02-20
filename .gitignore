@@ -1,11 +1,9 @@
-<<<<<<< HEAD
 #Ignore the following files:
 __pycache__
 *.bak
 *\~
 *.swp
-
-=======
+.vscode
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,vim,emacs,dotenv
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,vim,emacs,dotenv
@@ -224,4 +222,3 @@ tags
 [._]*.un~
 
 # End of https://www.toptal.com/developers/gitignore/api/python,vim,emacs,dotenv
->>>>>>> party_bot
