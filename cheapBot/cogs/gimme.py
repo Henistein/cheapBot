@@ -1,14 +1,13 @@
 import datetime
 import re
-from typing import Dict, List, Tuple
+from typing import Dict, List
 
 import discord
 import requests
 from discord.ext import commands
-from discord.ext.commands import cooldowns
 from jsonrpcclient import request  # type: ignore
 
-import config
+from .. import config
 
 
 class Gimme(commands.Cog):
@@ -37,7 +36,7 @@ class Gimme(commands.Cog):
   # IMPORTANT: this was the on_message event, has been renamed to run to comply with repo's
   # program flow
   @commands.command()
-  async def gimme(self, ctx: commands.Context):
+  async def gimme(self, ctx: commands.Context, addr: str):
 
     if ctx.author.bot:
       return
@@ -48,11 +47,8 @@ class Gimme(commands.Cog):
 
     if ctx.channel.name in self.allowed_channels:
       message: discord.Message = ctx.message
-      message_words: List[str] = message.content.split()
 
-      for word in message_words:
-        if re.search('^0x([A-Fa-f0-9]{40})$', word):
-          addr = word
+      if re.search('^0x([A-Fa-f0-9]{40})$', addr):
           url = f'{self.faucet_url}{message.author.id}&address={addr}'
           r = requests.get(url)
 

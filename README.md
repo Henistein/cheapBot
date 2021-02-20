@@ -27,7 +27,7 @@ Get your twitter ID from this site: https://tweeterid.com/
 
 Before deploying paste your token in config.py
 First, install dependencies by calling `pip3 install -r requirements.txt`
-Then, simply run the bot by calling `python3 bot.py`
+Then, simply run the bot by calling `python3 -u -m cheapBot.bot`
 
 ## Contributing
 

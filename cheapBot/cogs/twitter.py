@@ -1,24 +1,18 @@
-import pickle
-import re
-import os
 import datetime
-import json
-from jsonrpcclient import request
-import requests
-from typing import Dict, List, Tuple
+import re
+from typing import List
 
-import discord
-import requests                 
+import requests
 from discord.ext import commands
 
-import config
+from .. import config
+
 """
 Twitter bot
 
 Read discord messages, send request to smart contract
 """
 
-# insert the allowed channels
 
 class Twitter(commands.Cog):
   bot: commands.Bot
@@ -95,4 +89,3 @@ class Twitter(commands.Cog):
 
         await message.channel.send(
           'Request sent to contract! %s, userID: %s, tx: %s' % (message.author.mention, user, tx_hash))
- 

@@ -1,14 +1,14 @@
 import datetime
 import json
 import re
-from typing import List, Tuple
+from typing import List
 
 import discord  # type: ignore
 from discord.ext import commands
 
-import config
-
+from .. import config
 from . import client as cb
+
 '''
 Verification script, using the power of memes - WIP
 '''
