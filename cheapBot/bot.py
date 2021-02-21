@@ -4,7 +4,8 @@ from . import config
 from .cogs.gimme import Gimme
 from .cogs.twitter import Twitter
 from .cogs.verify import MemeVerify
-
+from .cogs.party import Party
+from .cogs.speculator import Speculator
 
 class CheapBot(commands.Bot):
   def __init__(self, prefix='$cheap '):
@@ -23,4 +24,6 @@ if __name__ == '__main__':
   bot.add_cog(Gimme(bot))
   bot.add_cog(MemeVerify(bot))
   bot.add_cog(Twitter(bot))
+  bot.add_cog(Party(bot))
+  bot.add_cog(Speculator(bot))
   bot.run(config.token)
