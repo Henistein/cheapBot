@@ -61,7 +61,7 @@ class Party(commands.Cog):
         path_party = "cheapBot/cogs/party_imgs"
         file_name = choice(os.listdir(path_party))
         file_ext = file_name.split(".")[-1]
-        with open(f'{path_party}\\{file_name}', 'rb') as f:
+        with open(f'{path_party}/{file_name}', 'rb') as f:
           await message.channel.send(file=discord.File(f, 'new_filename.'+file_ext))
           await message.channel.send(s)
       
