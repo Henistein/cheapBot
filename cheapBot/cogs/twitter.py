@@ -41,8 +41,19 @@ class Twitter(commands.Cog):
     return result.group(1)
 
   @commands.command()
-  async def twitter(self, ctx):
+  async def twitter(self, ctx: commands.Context):
+    """
+    Tweet about CheapEth and get rewarded (\"$cheap help twitter\")
 
+    * Tweet and include any of these keywords [\"cheapeth\", \"cheapethereum\", \"#cth\", \"$CTH\"]
+    * Type \"$cheap twitter <twitterID> <your cth arrd>\"
+    * Get your twitter ID from: https://tweeterid.com/
+    * <1000 followers = 1cth
+    * 1000-2000 followers = 2cth
+    * 2000+ followers = 3cth
+    * Check balance before and after as transaction not on explorer
+    * 1 reward per user
+    """
     if ctx.author.bot:
       return        
 
