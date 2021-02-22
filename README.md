@@ -23,6 +23,14 @@ Get your twitter ID from this site: https://tweeterid.com/
 <1000 folllowers = 1cth
 1000-2000 followers=2cth
 2000+followers=3cth
+
+### <a name="party">party</a>
+Call $cheap party to throw a party! no cTH being given, only partyness!
+
+### <a name="speculator">speculator</a>
+Speculator detector, not a command, it lurks in the selected channels and waits for speculator.
+When it detects one, it throws something at it. Ment to hodl off speculators and show them #speculation.
+
 ## Deployment
 
 Before deploying paste your token in config.py
