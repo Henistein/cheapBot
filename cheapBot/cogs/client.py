@@ -1,7 +1,6 @@
 import socket
-import sys
 
-def sendInfo(info):
+def sendInfo(info: str):
   # Create a TCP/IP socket
   sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -12,7 +11,7 @@ def sendInfo(info):
 
   try:
     # Send data
-    message = bytearray(info, 'utf-8') 
+    message = bytearray(info, 'utf-8')
     print('sending "%s"' % message)
     sock.sendall(message)
 
@@ -23,9 +22,7 @@ def sendInfo(info):
     while amount_received < amount_expected:
       data = sock.recv(16)
       amount_received += len(data)
-      print('received "%s"' % data)
-
+      print(f'received "{data.decode("ascii")}"')
   finally:
     print('closing socket')
     sock.close()
-
