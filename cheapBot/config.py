@@ -14,10 +14,10 @@ allowed_twitter_channels = ['free-cheapeth-sold-out']
 
 
 # Party
-allowed_party_channels = ['general', 'development', 'rewards', 'speculation', 'non-english', 'cheap-memes']
+allowed_party_channels = ['general', 'crowdsale', 'development', 'rewards', 'speculation', 'non-english', 'cheap-memes', 'zombie-town', 'uses-of-cheapeth', 'hiring', 'website', 'marketing']
 
 # Speculator detector
-allowed_check_spec_channels = ['general', 'development', 'rewards', 'speculation', 'non-english', 'cheap-memes']
+allowed_check_spec_channels = ['general', 'resources', 'feedback', 'crowdsale','cheap-info', 'development', 'mining', 'rewards', 'speculation', 'non-english', 'cheap-memes', 'zombie-town', 'uses-of-cheapeth', 'hiring', 'website', 'marketing']
 
 # Delete wallet address
 allowed_del_wallet_addr_channels = ['development', 'rewards', 'resources', 'feedback']
