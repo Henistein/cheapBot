@@ -6,9 +6,9 @@ from secrets import choice
 
 
 
-keywords = ["moon", "eth", "speculate", "cth", "sell", 
-            "exchange", "bitcoin", "worth", "cheap", "demand","how","much",
-            "trade"]
+keywords = ["moon", "eth", "speculate", "cth", "sell", "prices", "price", "ethereum", "value",
+            "exchange", "bitcoin", "worth", "cheap", "demand", "how", "much", "buy", "crypto"
+            "trade", "cheapeth", "gas", "token"]
 
 speculator_reply = ("Houston we have a Speculator! :rocket: Go to #speculation if you want to trash talk!",
                         "Speculator ALERT!",
