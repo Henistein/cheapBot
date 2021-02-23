@@ -10,6 +10,8 @@ Is cheapEth the future? Hell yeah!
 
 - [gimme](#gimme)
 - [twitter](#twitter)
+- [party](#party)
+- [clear](#clear)
 
 ### <a name="gimme">gimme</a>
 Sending the message `$cheap gimme YOUR_CTH_WALLET_ADDRESS_HERE` will make the
@@ -30,6 +32,15 @@ Call $cheap party to throw a party! no cTH being given, only partyness!
 ### <a name="speculator">speculator</a>
 Speculator detector, not a command, it lurks in the selected channels and waits for speculator.
 When it detects one, it throws something at it. Ment to hodl off speculators and show them #speculation.
+
+### <a name = "clear">clear</a>
+To clear messages if they contain wallet addresses. By default, `$cheap clear` checks for the last 10 messages in the channel.  
+To check for custom number of messages, say 1000 `$cheap clear 1000`  
+Note: Command checks for 1000 messages in history starting from latest. Does not mean 1000 removed messages.
+
+### <a name="delwalletaddr">delwalletaddr</a>
+When channels are passed to `allowed_del_wallet_addr_channels` in *config.py* file, it deletes any further messages with 
+wallet addresses in these channels and sends a custom message to the user in DM that the message has been deleted
 
 ## Deployment
 
@@ -56,3 +67,4 @@ If you think our work is worth some cTH? Why not make us whales? You can find ou
 - henistein: 0xDf1B72FC1bA5a77DD6c038DC2bc70746fFCA5caA
 - pasmat: 0x2d10651BC6BC4d18A44100F0C03E3AD02b4f37b8 
 - Delta: 0x574E0f8B36A2c40cA664562C334f61B4c6f67Fd6
+- nikkindev: 0x43076006D5D5c593D74E09eEE410B21D5707C3D8
