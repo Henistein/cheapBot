@@ -6,6 +6,8 @@ from .cogs.twitter import Twitter
 from .cogs.verify import MemeVerify
 from .cogs.party import Party
 from .cogs.speculator import Speculator
+from .cogs.delwalletaddr import DelWalletAddr
+from .cogs.clearchannel import ClearChannel
 
 class CheapBot(commands.Bot):
   def __init__(self, prefix='$cheap '):
@@ -26,4 +28,6 @@ if __name__ == '__main__':
   bot.add_cog(Twitter(bot))
   bot.add_cog(Party(bot))
   bot.add_cog(Speculator(bot))
+  bot.add_cog(DelWalletAddr(bot))
+  bot.add_cog(ClearChannel(bot))
   bot.run(config.token)
