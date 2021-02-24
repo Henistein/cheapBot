@@ -69,7 +69,7 @@ class Gimme(commands.Cog):
           s += f'\n**Transactions**: {count}'
 
           if grantedCth:
-            s += f'\n**Faucet grants you 0.1 cTH: :droplet:**'
+            s += f'\n**Faucet will grant you 0.1 cTH by opening this link: :droplet:**'
             s += f'\n<https://cethswap.com/?cth_address={addr}&type=faucet>'
           else:
             s += f'\n**You have not been given any cTH. Try again later.**'
