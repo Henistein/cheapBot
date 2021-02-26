@@ -1,4 +1,7 @@
-token = ''
+token = 'ODA5OTczODM3MTQzNzM2Mzcx.YCc46w.5qt7Zw8206n7kFaKR06rIm5OyH0'
+
+# Games
+allowed_game_channels = ['cheap-games']
 
 # Memes
 allowed_meme_channels = ['cheap-memes']

@@ -1,4 +1,5 @@
 web3
+tinydb
 jsonrpcclient==3.3.6
 discord.py==1.6.0
 discord==1.0.1
