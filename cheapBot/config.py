@@ -1,8 +1,5 @@
 token = ''
 
-# Games
-allowed_game_channels = ['cheap-games']
-
 # Memes
 allowed_meme_channels = ['cheap-memes']
 min_meme_reaction_approval = 10
