@@ -1,4 +1,4 @@
-token = 'ODA5OTczODM3MTQzNzM2Mzcx.YCc46w.5qt7Zw8206n7kFaKR06rIm5OyH0'
+token = ''
 
 # Games
 allowed_game_channels = ['cheap-games']
