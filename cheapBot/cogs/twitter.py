@@ -53,6 +53,7 @@ class Twitter(commands.Cog):
     * 2000+ followers = 3cth
     * Check balance before and after as transaction not on explorer
     * 1 reward per user
+    * Min account age 30 days, min followers 10
     """
     if ctx.author.bot:
       return        
