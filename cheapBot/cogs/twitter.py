@@ -82,22 +82,29 @@ class Twitter(commands.Cog):
 
         user = message.content.split(' ')[2]
 
-        url = 'http://157.245.4.45:5000/send-cth?user=' + str(user) + '&address=' + address
+        url = 'http://157.245.4.45:5000/send-cth2?user=' + str(user) + '&address=' + address + '&discordID=' + str(ctx.author.id)
         r = requests.get(url)
 
         success = r.status_code == 200
         if not success:
           await message.channel.send(
-              "Invalid input %s. Use: $cheap twitter <twitterID> <cth address>" % message.author.mention)
+              "Invalid input %s. Use: $cheap help twitter" % message.author.mention)
           return
 
+        r_json = r.json()
+        if 'result' in r_json:
+            if r_json['result'] == 'cooldown':
+                await message.channel.send(
+                    "Too many attempts %s" % message.author.mention)
+                return
+
         # send money to the account and notify admins
-        if 'tx' not in r.json():
+        if 'tx' not in r_json:
           await message.channel.send(
               "Invalid input %s. Use: $cheap twitter <twitterID> <cth address>" % message.author.mention)
           return
 
-        tx_hash = r.json()['tx']
+        tx_hash = r_json['tx']
 
         await message.channel.send(
           'Request sent to contract! %s, userID: %s, tx: %s' % (message.author.mention, user, tx_hash))
