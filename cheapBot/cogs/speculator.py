@@ -21,7 +21,7 @@ speculator_reply = ("Houston we have a Speculator! :rocket: Go to #speculation i
                         "Can we stay on :earth_africa:? #speculation",
                         "Goku: if speculator, no crowdsale!",
                         "Goku: speculator ruin world",
-                        "Goku: we need to flight speculator!")
+                        "Goku: we need to fight speculator!")
 
 
 words_treshold = 2
