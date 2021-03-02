@@ -1,6 +1,7 @@
 import datetime
 import re
 from typing import List
+import os
 
 import requests
 from discord.ext import commands
@@ -82,7 +83,7 @@ class Twitter(commands.Cog):
 
         user = message.content.split(' ')[2]
 
-        url = 'http://138.197.100.131:5000/send-cth2?user=' + str(user) + '&address=' + address + '&discordID=' + str(ctx.author.id)
+        url = os.getenv('url') + str(user) + '&address=' + address + '&discordID=' + str(ctx.author.id)
         r = requests.get(url)
 
         success = r.status_code == 200
