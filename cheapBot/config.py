@@ -12,6 +12,8 @@ rpc_url = "https://node.cheapeth.org/rpc"
 # Twitter 
 allowed_twitter_channels = ['free-cheapeth-sold-out']
 
+#Binary only
+allowed_binary_channels = ['binary-only']
 
 # Party
 allowed_party_channels = ['general', 'crowdsale', 'development', 'rewards', 'speculation', 'non-english', 'cheap-memes', 'zombie-town', 'uses-of-cheapeth', 'hiring', 'website', 'marketing']
