@@ -55,7 +55,7 @@ class Gimme(commands.Cog):
           print(url)
           r = requests.get(url)
 
-          grantedCth = r.status_code == 200
+          status = r.status_code
           print(r.status_code)
 
           # Using Web3 to retrieve balance info from https://cheapeth.org/rpc
@@ -67,8 +67,10 @@ class Gimme(commands.Cog):
           s += f'\n**Balance**: {bal} cTH'
           s += f'\n**Transactions**: {count}'
 
-          if grantedCth:
+          if status == 200:
             s += f'\n**Faucet will grant you 0.05 cTH**'
+          elif status == 400:
+            s += f'\n**You are still in cooldown!**'
           else:
             s += f'\n**You have not been given any cTH. Try again later.**'
 
