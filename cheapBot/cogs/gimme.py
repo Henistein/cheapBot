@@ -1,11 +1,12 @@
 import datetime
 import re
+import os
 from typing import Dict, List
 
 import discord
 import requests
 from discord.ext import commands
-from jsonrpcclient import request  # type: ignore
+from web3 import Web3
 
 from .. import config
 
@@ -22,6 +23,7 @@ class Gimme(commands.Cog):
     self.allowed_channels = config.allowed_gimme_channels
     self.cooldowns = {}
     self.faucet_url = config.faucet_url
+    self.w3 = Web3(Web3.HTTPProvider('https://node.cheapeth.org/rpc'))
 
   def not_on_cooldown(self, addr: str) -> bool:
     if addr in self.cooldowns:
@@ -49,28 +51,24 @@ class Gimme(commands.Cog):
       message: discord.Message = ctx.message
 
       if re.search('^0x([A-Fa-f0-9]{40})$', addr):
-          url = f'{self.faucet_url}{message.author.id}&address={addr}'
+          url = f'{os.getenv("FAUCET_IP")}?address={addr}'
+          print(url)
           r = requests.get(url)
 
           grantedCth = r.status_code == 200
           print(r.status_code)
 
-          # Using JSON-RPC to retrieve balance info from https://cheapeth.org/rpc
-          blockNum = request(config.rpc_url, 'eth_blockNumber').data.result
-          bal = request(config.rpc_url, 'eth_getBalance', addr, blockNum).data.result
-          count = request(config.rpc_url, 'eth_getTransactionCount', addr,
-                          blockNum).data.result
-          bal = str(round(float.fromhex(bal) / (1e+18), 10))
-          count = str(int(count, 16))
-          print(bal)
+          # Using Web3 to retrieve balance info from https://cheapeth.org/rpc
+          bal = self.w3.eth.get_balance(addr)
+          bal = str(round(bal / 1e+18, 10))
+          count = self.w3.eth.getTransactionCount(addr)
 
           s = f'**{message.author.name}**: <https://explore.cheapswap.io/account/{addr}>'
           s += f'\n**Balance**: {bal} cTH'
           s += f'\n**Transactions**: {count}'
 
           if grantedCth:
-            s += f'\n**Faucet will grant you 0.1 cTH by opening this link: :droplet:**'
-            s += f'\n<https://cethswap.com/?cth_address={addr}&type=faucet>'
+            s += f'\n**Faucet will grant you 0.05 cTH**'
           else:
             s += f'\n**You have not been given any cTH. Try again later.**'
 

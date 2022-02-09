@@ -1,4 +1,5 @@
-token = ''
+import os
+token = os.getenv('TOKEN')
 
 # Memes
 allowed_meme_channels = ['cheap-memes']
